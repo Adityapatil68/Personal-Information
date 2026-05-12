@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusChat — Public Login</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  body{overflow:auto;height:auto;min-height:100vh;}
+  .back-nav{padding:14px 24px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+  .back-nav a{color:var(--muted);text-decoration:none;font-size:13px;display:flex;align-items:center;gap:5px;transition:color .15s;}
+  .back-nav a:hover{color:var(--text);}
+  .aadhaar-note{background:rgba(79,142,255,0.07);border:1px solid rgba(79,142,255,0.15);border-radius:9px;padding:11px 13px;font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+  .aadhaar-note strong{color:var(--text);}
+  .otp-row{display:flex;gap:8px;}
+  .otp-row input{flex:1;}
+  .otp-row button{padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;white-space:nowrap;transition:all .18s;}
+  .otp-row button:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
+</style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="index.html">← Back to Main</a>
+</div>
+
+<div class="login-page">
+  <div class="login-card">
+    <span class="icon">🌐</span>
+    <h2>Public Access</h2>
+    <p class="sub">Join open group discussions. Verify with Aadhaar to participate.</p>
+
+    <div id="offlineNotice" class="offline-notice" style="display:none;">
+      ⚠️ Firebase not configured — joining in local demo mode. <a href="index.html" style="color:var(--gold);text-decoration:underline;margin-left:4px;">Configure →</a>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('login',this)">Login</button>
+      <button class="tab" onclick="switchTab('signup',this)">Sign Up</button>
+    </div>
+
+    <div id="panelLogin" class="panel active">
+      <div class="field"><label>Aadhaar Number</label><input type="text" id="loginAadhaar" placeholder="XXXX XXXX XXXX" maxlength="14"></div>
+      <div class="field">
+        <label>OTP</label>
+        <div class="otp-row">
+          <input type="text" id="loginOtp" placeholder="6-digit OTP" maxlength="6">
+          <button onclick="sendOTP()">Send OTP</button>
+        </div>
+      </div>
+      <div class="aadhaar-note"><strong>Note:</strong> In demo mode, any 6-digit OTP is accepted. Real Aadhaar verification requires backend integration.</div>
+      <button class="btn-join" style="background:var(--gold);color:#1a0e00;" onclick="joinPublic()">Enter Public Group Chat →</button>
+    </div>
+
+    <div id="panelSignup" class="panel">
+      <div class="field"><label>Full Name</label><input type="text" id="signupName" placeholder="As per Aadhaar"></div>
+      <div class="field"><label>Aadhaar Number</label><input type="text" id="signupAadhaar" placeholder="XXXX XXXX XXXX" maxlength="14"></div>
+      <div class="field"><label>Mobile Number</label><input type="text" id="signupMobile" placeholder="Registered mobile"></div>
+      <div class="field"><label>Create Password</label><input type="password" id="signupPass" placeholder="Min 8 characters"></div>
+      <button class="btn-join" style="background:var(--gold);color:#1a0e00;" onclick="signupPublic()">Register & Enter Group Chat →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase-util.js"></script>
+<script>
+var cfg = CC.getFirebaseConfig();
+if (!cfg) document.getElementById('offlineNotice').style.display = 'flex';
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panelLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('panelSignup').classList.toggle('active', tab === 'signup');
+}
+
+var otpSent = false;
+function sendOTP() {
+  var aadh = document.getElementById('loginAadhaar').value.trim();
+  if (aadh.replace(/\s/g,'').length < 12) { CC.toast('toasts','Enter valid 12-digit Aadhaar','err'); return; }
+  otpSent = true;
+  CC.toast('toasts','OTP sent to linked mobile (demo: use any 6 digits)','info');
+}
+
+function joinPublic() {
+  var otp = document.getElementById('loginOtp').value.trim();
+  if (otp.length < 6) { CC.toast('toasts','Enter 6-digit OTP','err'); return; }
+  var name = 'Public User ' + Math.floor(Math.random()*900+100);
+  saveAndGo(name, 'public', 'general');
+}
+
+function signupPublic() {
+  var name = document.getElementById('signupName').value.trim();
+  var pass = document.getElementById('signupPass').value;
+  if (!name) { CC.toast('toasts','Enter your name','err'); return; }
+  if (pass.length < 8) { CC.toast('toasts','Password must be 8+ characters','err'); return; }
+  saveAndGo(name, 'public', 'general');
+}
+
+function saveAndGo(name, role, dept) {
+  var user = { name, role, dept, color: CC.avatarColor(name), id: CC.getOrCreateUserId() };
+  localStorage.setItem('cc_user', JSON.stringify(user));
+  window.location.href = 'group-chat.html';
+}
+</script>
+</body>
+</html>
