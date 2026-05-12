@@ -1,112 +1,492 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CampusChat — Public Login</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
-<style>
-  body{overflow:auto;height:auto;min-height:100vh;}
-  .back-nav{padding:14px 24px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
-  .back-nav a{color:var(--muted);text-decoration:none;font-size:13px;display:flex;align-items:center;gap:5px;transition:color .15s;}
-  .back-nav a:hover{color:var(--text);}
-  .aadhaar-note{background:rgba(79,142,255,0.07);border:1px solid rgba(79,142,255,0.15);border-radius:9px;padding:11px 13px;font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
-  .aadhaar-note strong{color:var(--text);}
-  .otp-row{display:flex;gap:8px;}
-  .otp-row input{flex:1;}
-  .otp-row button{padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;white-space:nowrap;transition:all .18s;}
-  .otp-row button:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Futuristic Website</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #050816, #0f172a, #1e1b4b);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .bg-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+        }
+        
+        .glow1 {
+            background: #7c3aed;
+            top: -100px;
+            left: -100px;
+            opacity: 0.4;
+        }
+        
+        .glow2 {
+            background: #06b6d4;
+            bottom: -100px;
+            right: -100px;
+            opacity: 0.4;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 30px 0;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px 30px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            animation: slideDown 1s ease;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(to right, #22d3ee, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: 0.4s;
+            font-weight: 600;
+        }
+        
+        .nav-links button:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: linear-gradient(to right, #06b6d4, #9333ea);
+            box-shadow: 0 10px 25px rgba(147, 51, 234, 0.5);
+        }
+        
+        .hero {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 60px;
+            align-items: center;
+            margin-top: 80px;
+        }
+        
+        .hero-text {
+            animation: fadeLeft 1.2s ease;
+        }
+        
+        .hero-text h1 {
+            font-size: 72px;
+            line-height: 1.1;
+            font-weight: 800;
+        }
+        
+        .hero-text span {
+            background: linear-gradient(to right, #22d3ee, #3b82f6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-text p {
+            margin-top: 25px;
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-size: 18px;
+            max-width: 600px;
+        }
+        
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-buttons button {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #06b6d4, #9333ea);
+            color: white;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-buttons button:hover {
+            transform: scale(1.05);
+        }
+        
+        .hero-image {
+            height: 450px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeRight 1.2s ease;
+        }
+        
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border: 5px dashed #22d3ee;
+            border-radius: 50%;
+            animation: rotate 18s linear infinite;
+        }
+        
+        .hero-image h2 {
+            font-size: 54px;
+            z-index: 2;
+            background: linear-gradient(to right, #67e8f9, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-top: 120px;
+            margin-bottom: 60px;
+            font-weight: 800;
+            background: linear-gradient(to right, #22d3ee, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 35px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            transition: 0.5s;
+            animation: fadeUp 1s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.35);
+        }
+        
+        .card-image {
+            height: 180px;
+            border-radius: 25px;
+            background: linear-gradient(to bottom right, #06b6d4, #7e22ce);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 800;
+        }
+        
+        .card h3 {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        
+        .card p {
+            margin-top: 12px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .marquee {
+            margin-top: 120px;
+            overflow: hidden;
+            padding: 35px 0;
+            border-radius: 35px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+        }
+        
+        .marquee-content {
+            white-space: nowrap;
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+            font-size: 52px;
+            font-weight: 800;
+            background: linear-gradient(to right, #22d3ee, #c084fc, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        footer {
+            margin-top: 100px;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media(max-width: 768px) {
+            .hero-text h1 {
+                font-size: 48px;
+            }
+            .hero-image {
+                height: 320px;
+            }
+            .hero-image h2 {
+                font-size: 36px;
+            }
+            .section-title {
+                font-size: 36px;
+            }
+            .marquee-content {
+                font-size: 34px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="back-nav">
-  <a href="index.html">← Back to Main</a>
-</div>
+    <div class="bg-glow glow1"></div>
+    <div class="bg-glow glow2"></div>
 
-<div class="login-page">
-  <div class="login-card">
-    <span class="icon">🌐</span>
-    <h2>Public Access</h2>
-    <p class="sub">Join open group discussions. Verify with Aadhaar to participate.</p>
+    <div class="container">
 
-    <div id="offlineNotice" class="offline-notice" style="display:none;">
-      ⚠️ Firebase not configured — joining in local demo mode. <a href="index.html" style="color:var(--gold);text-decoration:underline;margin-left:4px;">Configure →</a>
+        <nav class="navbar">
+            <div class="logo">ADITYA THAKARE</div>
+
+            <div class="nav-links">
+                <button>Education</button>
+                <button>Resume</button>
+                <button>Projects</button>
+
+                <button>Education</button>
+                <button>Work Experience</button>
+                <button>Community</button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1>
+                    BUILDING <br>
+                    <span>MODERN WEBSITES</span>
+                </h1>
+
+                <p>
+                    Modern futuristic portfolio website with glassmorphism UI, neon gradients, responsive layout, smooth animations, hover effects, and premium dark styling.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn-primary">Explore</button>
+                    <button class="btn-secondary">Contact</button>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <h2>FUTURE UI</h2>
+            </div>
+        </section>
+
+        <h2 class="section-title">FEATURED PROJECTS</h2>
+
+        <section class="cards">
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>Creative Design</h3>
+                <p>Modern animated card with futuristic styling and smooth effects.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>Web Animation</h3>
+                <p>Professional responsive UI with premium glassmorphism design.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>Gaming UI</h3>
+                <p>Interactive modern layouts with hover transitions and gradients.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>Portfolio</h3>
+                <p>Creative portfolio website design with responsive mobile layout.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>Dashboard</h3>
+                <p>Modern dashboard UI with premium dark glassmorphism effects.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>React Website</h3>
+                <p>Futuristic web experience using smooth animation transitions.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>Modern Layout</h3>
+                <p>Beautiful layout structure with responsive adaptive sections.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-image">PHOTO</div>
+                <h3>UI/UX Project</h3>
+                <p>Creative user interface inspired by futuristic premium websites.</p>
+            </div>
+
+        </section>
+
+        <section class="marquee">
+            <div class="marquee-content">
+                ✨ MODERN WEBSITE ✨ FUTURISTIC UI ✨ RESPONSIVE DESIGN ✨ GLASSMORPHISM ✨ ANIMATION ✨
+            </div>
+        </section>
+
+        <footer>
+            <h3>© 2026 Aditya Thakare • Modern Animated Portfolio Website</h3>
+        </footer>
+
     </div>
 
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('login',this)">Login</button>
-      <button class="tab" onclick="switchTab('signup',this)">Sign Up</button>
-    </div>
+    <script>
+        const buttons = document.querySelectorAll('button');
 
-    <div id="panelLogin" class="panel active">
-      <div class="field"><label>Aadhaar Number</label><input type="text" id="loginAadhaar" placeholder="XXXX XXXX XXXX" maxlength="14"></div>
-      <div class="field">
-        <label>OTP</label>
-        <div class="otp-row">
-          <input type="text" id="loginOtp" placeholder="6-digit OTP" maxlength="6">
-          <button onclick="sendOTP()">Send OTP</button>
-        </div>
-      </div>
-      <div class="aadhaar-note"><strong>Note:</strong> In demo mode, any 6-digit OTP is accepted. Real Aadhaar verification requires backend integration.</div>
-      <button class="btn-join" style="background:var(--gold);color:#1a0e00;" onclick="joinPublic()">Enter Public Group Chat →</button>
-    </div>
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.boxShadow = '0 10px 30px rgba(34,211,238,0.5)';
+            });
 
-    <div id="panelSignup" class="panel">
-      <div class="field"><label>Full Name</label><input type="text" id="signupName" placeholder="As per Aadhaar"></div>
-      <div class="field"><label>Aadhaar Number</label><input type="text" id="signupAadhaar" placeholder="XXXX XXXX XXXX" maxlength="14"></div>
-      <div class="field"><label>Mobile Number</label><input type="text" id="signupMobile" placeholder="Registered mobile"></div>
-      <div class="field"><label>Create Password</label><input type="password" id="signupPass" placeholder="Min 8 characters"></div>
-      <button class="btn-join" style="background:var(--gold);color:#1a0e00;" onclick="signupPublic()">Register & Enter Group Chat →</button>
-    </div>
-  </div>
-</div>
+            button.addEventListener('mouseleave', () => {
+                button.style.boxShadow = 'none';
+            });
+        });
+    </script>
 
-<div class="toasts" id="toasts"></div>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-<script src="firebase-util.js"></script>
-<script>
-var cfg = CC.getFirebaseConfig();
-if (!cfg) document.getElementById('offlineNotice').style.display = 'flex';
-
-function switchTab(tab, btn) {
-  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('panelLogin').classList.toggle('active', tab === 'login');
-  document.getElementById('panelSignup').classList.toggle('active', tab === 'signup');
-}
-
-var otpSent = false;
-function sendOTP() {
-  var aadh = document.getElementById('loginAadhaar').value.trim();
-  if (aadh.replace(/\s/g,'').length < 12) { CC.toast('toasts','Enter valid 12-digit Aadhaar','err'); return; }
-  otpSent = true;
-  CC.toast('toasts','OTP sent to linked mobile (demo: use any 6 digits)','info');
-}
-
-function joinPublic() {
-  var otp = document.getElementById('loginOtp').value.trim();
-  if (otp.length < 6) { CC.toast('toasts','Enter 6-digit OTP','err'); return; }
-  var name = 'Public User ' + Math.floor(Math.random()*900+100);
-  saveAndGo(name, 'public', 'general');
-}
-
-function signupPublic() {
-  var name = document.getElementById('signupName').value.trim();
-  var pass = document.getElementById('signupPass').value;
-  if (!name) { CC.toast('toasts','Enter your name','err'); return; }
-  if (pass.length < 8) { CC.toast('toasts','Password must be 8+ characters','err'); return; }
-  saveAndGo(name, 'public', 'general');
-}
-
-function saveAndGo(name, role, dept) {
-  var user = { name, role, dept, color: CC.avatarColor(name), id: CC.getOrCreateUserId() };
-  localStorage.setItem('cc_user', JSON.stringify(user));
-  window.location.href = 'group-chat.html';
-}
-</script>
 </body>
+
 </html>
