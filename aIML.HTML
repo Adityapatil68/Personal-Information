@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI & LLM Engineer Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white min-h-screen">
+
+  <div class="max-w-7xl mx-auto p-6">
+
+    <div class="grid lg:grid-cols-2 gap-8 items-center mb-10">
+      <div>
+        <h1 class="text-5xl font-black leading-tight mb-4">
+          AI & LLM Engineer Roadmap
+        </h1>
+
+        <p class="text-slate-300 text-lg mb-6">
+          Advanced AI Learning Dashboard with Skill Detection, Real-Time Analytics,
+          AI Recommendations, and Project Readiness Tracking.
+        </p>
+
+        <div class="flex gap-4 flex-wrap">
+          <button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-2xl font-bold transition-all">
+            Start Learning
+          </button>
+
+          <button onclick="resetProgress()"
+            class="border border-slate-700 hover:bg-slate-800 px-6 py-3 rounded-2xl font-bold transition-all">
+            Reset Progress
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-bold">Progress Tracker</h2>
+          <span class="bg-green-500/20 text-green-400 px-4 py-2 rounded-xl text-sm">
+            Real-Time
+          </span>
+        </div>
+
+        <div class="w-full bg-slate-800 rounded-full h-6 overflow-hidden mb-3">
+          <div id="progressBar"
+            class="bg-gradient-to-r from-green-500 to-cyan-500 h-6 transition-all duration-500"
+            style="width:0%"></div>
+        </div>
+
+        <div class="flex justify-between text-sm text-slate-300 mb-6">
+          <span id="progressText">0 / 30 Days Completed</span>
+          <span id="progressPercent">0%</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-slate-800 rounded-2xl p-4">
+            <p class="text-sm text-slate-400">Skill Score</p>
+            <h3 id="skillScore" class="text-3xl font-black mt-2">0%</h3>
+          </div>
+
+          <div class="bg-slate-800 rounded-2xl p-4">
+            <p class="text-sm text-slate-400">Project Ready</p>
+            <h3 id="projectReady" class="text-3xl font-black mt-2">15%</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-4 gap-6 mb-10">
+
+      <div class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl p-6 shadow-2xl">
+        <p class="text-sm text-white/80 mb-2">AI Recommendation</p>
+        <p id="recommendation" class="text-lg font-bold leading-relaxed">
+          Complete AI Basics to unlock advanced recommendations.
+        </p>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-6 shadow-2xl">
+        <p class="text-sm text-white/80 mb-2">Learning Analytics</p>
+        <h2 class="text-5xl font-black" id="analytics">0%</h2>
+        <p class="mt-3 text-sm text-white/80">Real-Time Skill Detection System</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl p-6 shadow-2xl">
+        <p class="text-sm text-white/80 mb-2">Milestone Status</p>
+        <h2 class="text-5xl font-black" id="milestone">0</h2>
+        <p class="mt-3 text-sm text-white/80">Learning Milestones Completed</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-600 to-emerald-600 rounded-3xl p-6 shadow-2xl">
+        <p class="text-sm text-white/80 mb-2">AI Readiness</p>
+        <h2 class="text-5xl font-black" id="readiness">15%</h2>
+        <p class="mt-3 text-sm text-white/80">Deployment Readiness Analysis</p>
+      </div>
+
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 mb-10">
+      <div class="grid lg:grid-cols-2 gap-4">
+
+        <input
+          type="text"
+          id="search"
+          placeholder="Search AI topics..."
+          class="bg-slate-950 border border-slate-700 rounded-2xl px-5 py-3 text-white outline-none"
+        />
+
+        <select id="category"
+          class="bg-slate-950 border border-slate-700 rounded-2xl px-5 py-3 text-white outline-none">
+          <option>All</option>
+          <option>AI Basics</option>
+          <option>NLP</option>
+          <option>Search</option>
+          <option>LLMs</option>
+        </select>
+
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-3xl font-black">30-Day Curriculum</h2>
+
+      <div class="bg-blue-600 px-4 py-2 rounded-xl text-sm font-semibold">
+        Interactive Learning Dashboard
+      </div>
+    </div>
+
+    <div id="curriculum" class="grid lg:grid-cols-2 gap-6"></div>
+
+    <div class="mt-12 bg-slate-900 border border-slate-800 rounded-3xl p-8">
+      <h2 class="text-3xl font-black mb-6">Future AI Integration Structure</h2>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <div class="bg-slate-950 rounded-2xl p-5 border border-slate-800">
+          <h3 class="text-xl font-bold mb-3">AI Recommendation Engine</h3>
+          <p class="text-slate-400 text-sm">
+            Future integration with OpenAI APIs for personalized AI learning guidance.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 rounded-2xl p-5 border border-slate-800">
+          <h3 class="text-xl font-bold mb-3">Real-Time Analytics</h3>
+          <p class="text-slate-400 text-sm">
+            Track coding speed, learning velocity, and interview preparation score.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 rounded-2xl p-5 border border-slate-800">
+          <h3 class="text-xl font-bold mb-3">Skill Detection Dashboard</h3>
+          <p class="text-slate-400 text-sm">
+            Intelligent AI scoring system based on completed milestones and projects.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="text-center text-slate-500 text-sm py-10">
+      Built with HTML + Tailwind CSS + JavaScript
+    </footer>
+
+  </div>
+
+  <script>
+
+    
+const curriculum = [  {    day: 1,    title: "Introduction to AI",    category: "AI Basics",    theory: [      "What is Artificial Intelligence?",      "Scope of AI",      "History of AI",      "Turing Test",      "Modern AI"    ],    tasks: [      "Write 1-page AI summary",      "Create AI milestone timeline"    ],    practice: [      "Watch introductory AI videos",      "Read IBM AI basics article"    ],    coding: [      "Create simple AI notes app",      "Setup Python environment"    ],    interview: "What is Artificial Intelligence?"  },  {    day: 2,    title: "Applications of AI",    category: "AI Basics",    theory: [      "AI in Healthcare",      "Recommendation Systems",      "Robotics",      "Self-driving Cars",      "NLP & Chatbots"    ],    tasks: [      "Find 5 real-world AI applications",      "Explain 2 AI tools you use daily"    ],    practice: [      "Research AI-powered apps"    ],    coding: [      "Build AI applications showcase page"    ],    interview: "Explain real-world AI applications."  },  {    day: 3,    title: "Intelligence Theories",    category: "AI Basics",    theory: [      "Human vs Machine Intelligence",      "Rational Agent Theory",      "Characteristics of Intelligence"    ],    tasks: [      "Compare Human Intelligence vs AI",      "Create notes on learning and reasoning"    ],    practice: [      "Create intelligent agent chart"    ],    coding: [      "Create rational-agent simulation"    ],    interview: "Difference between Human Intelligence and AI?"  },  {    day: 4,    title: "Knowledge Representation",    category: "Knowledge Representation",    theory: [      "Declarative Knowledge",      "Procedural Knowledge",      "Meta Knowledge"    ],    tasks: [      "Create small knowledge base in Python"    ],    practice: [      "Store facts using dictionary/list"    ],    coding: [      "Build Python knowledge base"    ],    interview: "What is Knowledge Representation?"  },  {    day: 5,    title: "Semantic Networks",    category: "Knowledge Representation",    theory: [      "Semantic Networks",      "Nodes and Relationships",      "IS-A Relationships"    ],    tasks: [      "Create semantic network for animals"    ],    practice: [      "Use Python dictionaries or NetworkX"    ],    coding: [      "Build semantic graph visualizer"    ],    interview: "Explain semantic networks."  },  {    day: 6,    title: "Frames in AI",    category: "Knowledge Representation",    theory: [      "Frames and Slots",      "Inheritance in Frames"    ],    tasks: [      "Create Book Frame",      "Extend into TextBook Frame"    ],    practice: [      "Practice frame structures in Python"    ],    coding: [      "Build frame-based system"    ],    interview: "What are Frames in AI?"  },  {    day: 7,    title: "Scripts & Conceptual Dependency",    category: "Knowledge Representation",    theory: [      "Scripts in AI",      "Conceptual Dependency Theory"    ],    tasks: [      "Create shopping script",      "Draw dependency graph"    ],    practice: [      "Build family-tree knowledge base"    ],    coding: [      "Create conceptual dependency system"    ],    interview: "Difference between scripts and frames?"  },  {    day: 8,    title: "Propositional Logic",    category: "Logic",    theory: [      "AND, OR, NOT",      "Truth Tables"    ],    tasks: [      "Build truth tables manually"    ],    practice: [      "Create Python logic evaluator"    ],    coding: [      "Truth table generator"    ],    interview: "Explain propositional logic."  },  {    day: 9,    title: "Predicate Logic",    category: "Logic",    theory: [      "Predicates",      "Quantifiers",      "First Order Logic"    ],    tasks: [      "Create facts and rules",      "Implement forward chaining"    ],    practice: [      "Logic problem solving"    ],    coding: [      "Predicate logic engine"    ],    interview: "What is Predicate Logic?"  },  {    day: 10,    title: "Logic Programming",    category: "Logic",    theory: [      "Syntax vs Semantics",      "Resolution",      "Unification"    ],    tasks: [      "Query logical statements"    ],    practice: [      "Use Python logic libraries"    ],    coding: [      "Logic query system"    ],    interview: "What is logic programming?"  },  {    day: 11,    title: "Reasoning in AI",    category: "Logic",    theory: [      "Deductive Reasoning",      "Inductive Reasoning",      "Abductive Reasoning"    ],    tasks: [      "Implement forward chaining",      "Implement backward chaining"    ],    practice: [      "Reasoning examples"    ],    coding: [      "Inference engine"    ],    interview: "Explain deductive reasoning."  },  {    day: 12,    title: "Modern Knowledge Representation",    category: "Knowledge Representation",    theory: [      "Knowledge Graphs",      "Neural-Symbolic AI",      "Explainable AI"    ],    tasks: [      "Research modern KR systems"    ],    practice: [      "Write short notes"    ],    coding: [      "Mini knowledge graph"    ],    interview: "What is Explainable AI?"  },  {    day: 13,    title: "NLP Basics",    category: "NLP",    theory: [      "Tokenization",      "POS Tagging",      "Syntax Parsing",      "Semantics"    ],    tasks: [      "Parse sentences",      "Identify entities"    ],    practice: [      "Use NLTK/spaCy"    ],    coding: [      "Sentiment analyzer"    ],    interview: "What is NLP?"  },  {    day: 14,    title: "Discourse & Pragmatics",    category: "NLP",    theory: [      "Pronoun Resolution",      "Context Understanding",      "Figurative Meaning"    ],    tasks: [      "Analyze paragraph references"    ],    practice: [      "Explain figurative sentences"    ],    coding: [      "Context-aware chatbot"    ],    interview: "Why is pragmatics important?"  },  {    day: 15,    title: "Production Systems",    category: "Expert Systems",    theory: [      "Rule-Based Systems",      "Inference Cycle"    ],    tasks: [      "Create IF-THEN rules"    ],    practice: [      "Simulate inference engine"    ],    coding: [      "Rule engine"    ],    interview: "Explain production systems."  },  {    day: 16,    title: "Rule-Based vs Fact-Based Systems",    category: "Expert Systems",    theory: [      "Rule systems",      "Fact systems"    ],    tasks: [      "Build both systems"    ],    practice: [      "Compare outputs"    ],    coding: [      "Rule vs Fact comparison app"    ],    interview: "Difference between rule and fact systems?"  },  {    day: 17,    title: "Expert Systems",    category: "Expert Systems",    theory: [      "Knowledge Base",      "Inference Engine",      "Decision Making"    ],    tasks: [      "Design medical expert system"    ],    practice: [      "Expert decision examples"    ],    coding: [      "Medical diagnosis chatbot"    ],    interview: "What is an expert system?"  },  {    day: 18,    title: "Meta Knowledge",    category: "Expert Systems",    theory: [      "Knowledge about Knowledge"    ],    tasks: [      "Add meta-rule handling"    ],    practice: [      "Improve inference engine"    ],    coding: [      "Meta-rule AI system"    ],    interview: "What is meta knowledge?"  },  {    day: 19,    title: "Search Algorithms",    category: "Search",    theory: [      "Graph Search",      "States & Goals"    ],    tasks: [      "Implement BFS"    ],    practice: [      "Search path examples"    ],    coding: [      "Maze solver"    ],    interview: "What is graph search?"  },  {    day: 20,    title: "BFS & DFS",    category: "Search",    theory: [      "Blind Search",      "DFS vs BFS"    ],    tasks: [      "Implement DFS",      "Compare BFS vs DFS"    ],    practice: [      "Traversal problems"    ],    coding: [      "Graph traversal visualizer"    ],    interview: "Difference between BFS and DFS?"  },  {    day: 21,    title: "Heuristic Search",    category: "Search",    theory: [      "A* Search",      "Greedy Best First Search",      "Heuristics"    ],    tasks: [      "Build A* pathfinding"    ],    practice: [      "Grid pathfinding"    ],    coding: [      "A* visualizer"    ],    interview: "What is heuristic search?"  },  {    day: 22,    title: "Project Planning",    category: "Project",    theory: [      "Project Architecture",      "Feature Planning"    ],    tasks: [      "Select final project",      "Create proposal"    ],    practice: [      "Wireframe planning"    ],    coding: [      "Setup project structure"    ],    interview: "How do you plan projects?"  },  {    day: 23,    title: "Project Development Part 1",    category: "Project",    theory: [      "Knowledge Base Integration"    ],    tasks: [      "Build inference engine"    ],    practice: [      "Module structuring"    ],    coding: [      "Backend development"    ],    interview: "Explain your architecture."  },  {    day: 24,    title: "Project Development Part 2",    category: "Project",    theory: [      "NLP & Search Integration"    ],    tasks: [      "Improve logic handling"    ],    practice: [      "Feature testing"    ],    coding: [      "Search + NLP module"    ],    interview: "How does NLP work in your app?"  },  {    day: 25,    title: "Advanced Features",    category: "Project",    theory: [      "Semantic Processing",      "AI Responses"    ],    tasks: [      "Add semantic handling"    ],    practice: [      "Improve response quality"    ],    coding: [      "AI assistant features"    ],    interview: "How do semantic systems work?"  },  {    day: 26,    title: "Optimization",    category: "Project",    theory: [      "Performance Optimization"    ],    tasks: [      "Improve inference speed",      "Refactor code"    ],    practice: [      "Testing optimization"    ],    coding: [      "Optimize search system"    ],    interview: "How do you optimize AI systems?"  },  {    day: 27,    title: "Testing & Debugging",    category: "Project",    theory: [      "Debugging",      "Software Testing"    ],    tasks: [      "Fix bugs/errors"    ],    practice: [      "System testing"    ],    coding: [      "Error handling improvements"    ],    interview: "Explain debugging process."  },  {    day: 28,    title: "Documentation",    category: "Project",    theory: [      "Technical Documentation"    ],    tasks: [      "Write README",      "Prepare demo"    ],    practice: [      "Code comments"    ],    coding: [      "Documentation site"    ],    interview: "Why is documentation important?"  },  {    day: 29,    title: "Presentation",    category: "Project",    theory: [      "Presentation Skills"    ],    tasks: [      "Present project",      "Record demo"    ],    practice: [      "Collect feedback"    ],    coding: [      "Polish UI"    ],    interview: "Explain your complete project."  },  {    day: 30,    title: "Evaluation & Reflection",    category: "Project",    theory: [      "Project Evaluation",      "Learning Reflection"    ],    tasks: [      "Evaluate project",      "Write reflection"    ],    practice: [      "Portfolio review"    ],    coding: [      "Final deployment"    ],    interview: "What did you learn in 30 days?"  }];
+
+
+    const curriculumContainer = document.getElementById('curriculum');
+    const searchInput = document.getElementById('search');
+    const categorySelect = document.getElementById('category');
+
+    function getProgress() {
+      return JSON.parse(localStorage.getItem('llm-progress') || '{}');
+    }
+
+    function saveProgress(data) {
+      localStorage.setItem('llm-progress', JSON.stringify(data));
+    }
+
+    function toggleComplete(day) {
+      const progress = getProgress();
+
+      if(progress[day]) {
+        delete progress[day];
+      } else {
+        progress[day] = true;
+      }
+
+      saveProgress(progress);
+      renderCurriculum();
+      updateDashboard();
+    }
+
+    function toggleDetails(day) {
+      const details = document.getElementById('details-' + day);
+
+      if(details.classList.contains('hidden')) {
+        details.classList.remove('hidden');
+      } else {
+        details.classList.add('hidden');
+      }
+    }
+
+    function updateDashboard() {
+      const progress = getProgress();
+      const completed = Object.keys(progress).length;
+      const percentage = Math.round((completed / curriculum.length) * 100);
+
+      document.getElementById('progressBar').style.width = percentage + '%';
+      document.getElementById('progressText').innerText = completed + ' / ' + curriculum.length + ' Days Completed';
+      document.getElementById('progressPercent').innerText = percentage + '%';
+      document.getElementById('skillScore').innerText = Math.round(percentage * 0.9) + '%';
+      document.getElementById('projectReady').innerText = Math.min(100, percentage + 15) + '%';
+      document.getElementById('analytics').innerText = percentage + '%';
+      document.getElementById('milestone').innerText = completed;
+      document.getElementById('readiness').innerText = Math.min(100, percentage + 15) + '%';
+
+      let recommendation = 'Complete AI Basics to unlock advanced recommendations.';
+
+      if(percentage >= 30) {
+        recommendation = 'Start building mini AI projects and improve NLP skills.';
+      }
+
+      if(percentage >= 70) {
+        recommendation = 'You are ready for advanced AI deployment projects.';
+      }
+
+      document.getElementById('recommendation').innerText = recommendation;
+    }
+
+    function renderCurriculum() {
+      const search = searchInput.value.toLowerCase();
+      const category = categorySelect.value;
+      const progress = getProgress();
+
+      curriculumContainer.innerHTML = '';
+
+      const filtered = curriculum.filter(item => {
+        const matchSearch = item.title.toLowerCase().includes(search);
+        const matchCategory = category === 'All' || item.category === category;
+
+        return matchSearch && matchCategory;
+      });
+
+      filtered.forEach(item => {
+
+        const completed = progress[item.day];
+
+        curriculumContainer.innerHTML += `
+          <div class="rounded-3xl border p-6 transition-all ${completed ? 'bg-green-950 border-green-700' : 'bg-slate-900 border-slate-800'}">
+
+            <div class="flex justify-between items-start mb-4 gap-4">
+              <div>
+                <p class="text-blue-400 font-bold mb-1">Day ${item.day}</p>
+                <h3 class="text-2xl font-bold mb-2">${item.title}</h3>
+                <span class="inline-block bg-slate-800 text-xs px-3 py-1 rounded-full border border-slate-700">
+                  ${item.category}
+                </span>
+              </div>
+
+              <button onclick="toggleComplete(${item.day})"
+                class="${completed ? 'bg-green-600' : 'bg-slate-800'} px-4 py-2 rounded-xl font-semibold hover:scale-105 transition-all">
+                ${completed ? 'Completed ✓' : 'Complete'}
+              </button>
+            </div>
+
+            <div class="flex gap-3 mb-4">
+              <button onclick="toggleDetails(${item.day})"
+                class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                Show / Hide Details
+              </button>
+            </div>
+
+            <div id="details-${item.day}" class="hidden space-y-4">
+
+              <div class="bg-slate-950 rounded-2xl p-4">
+                <h4 class="font-bold text-yellow-400 mb-2">📘 Theory</h4>
+                <p class="text-slate-300 text-sm">${item.theory}</p>
+              </div>
+
+              <div class="bg-slate-950 rounded-2xl p-4">
+                <h4 class="font-bold text-green-400 mb-2">💻 Coding</h4>
+                <p class="text-slate-300 text-sm">${item.coding}</p>
+              </div>
+
+              <div class="bg-slate-950 rounded-2xl p-4">
+                <h4 class="font-bold text-pink-400 mb-2">🎤 Interview</h4>
+                <p class="text-slate-300 text-sm">${item.interview}</p>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+
+      });
+    }
+
+    function resetProgress() {
+      localStorage.removeItem('llm-progress');
+      renderCurriculum();
+      updateDashboard();
+    }
+
+    searchInput.addEventListener('input', renderCurriculum);
+    categorySelect.addEventListener('change', renderCurriculum);
+
+    renderCurriculum();
+    updateDashboard();
+
+  </script>
+
+</body>
+</html>
